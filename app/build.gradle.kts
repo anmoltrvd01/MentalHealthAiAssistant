@@ -50,5 +50,11 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.google.code.gson:gson:2.10.1")
 
+    implementation ("com.google.android.material:material:1.8.0")
+
+    implementation ("com.google.android.gms:play-services-fitness:21.1.0")
+
+    implementation ("com.google.android.gms:play-services-auth:19.0.0")
+
 
 }
