@@ -1,37 +1,30 @@
 package com.example.mentalhealthaibot
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class ChatActivity : AppCompatActivity() {
-    private val messages = mutableListOf<ChatMessage>()
-    private lateinit var chatAdapter: ChatAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
 
-        val recyclerViewChat = findViewById<RecyclerView>(R.id.recyclerViewChat)
-        val etMessage = findViewById<EditText>(R.id.etMessage)
-        val btnSend = findViewById<Button>(R.id.btnSend)
+        // RecyclerView ko find karo
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewChat)
 
-        chatAdapter = ChatAdapter(messages)
-        recyclerViewChat.layoutManager = LinearLayoutManager(this)
-        recyclerViewChat.adapter = chatAdapter
+        // LayoutManager set karo
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        btnSend.setOnClickListener {
-            val message = etMessage.text.toString()
-            if (message.isNotEmpty()) {
-                messages.add(ChatMessage(message, true))
-                chatAdapter.notifyItemInserted(messages.size - 1)
-                etMessage.text.clear()
+        // Sample messages list banaiye
+        val messages = listOf(
+            ChatMessage("Let's work on your workout plan for today. How are you feeling?", R.drawable.ic_profile),
+            ChatMessage("I'm feeling great today, ready for a challenge!", R.drawable.ic_profile)
+        )
 
-                // Future: Gemini API se reply lena yahan implement hoga
-            }
-        }
+        // Adapter ko set karo
+        val adapter = ChatAdapter(messages)
+        recyclerView.adapter = adapter
     }
 }
