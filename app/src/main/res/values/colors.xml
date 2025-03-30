@@ -20,5 +20,11 @@
         <color name="calories_color">#FF9800</color>
         <color name="water_color">#03A9F4</color>
 
+    <!-- Chat UI specific colors -->
+    <color name="message_input_background">#F5F5F5</color>
+    <color name="coach_message_background">#F0F0F0</color>
+    <color name="user_message_background">@color/primary_color</color>
+    <color name="divider_color">#DDDDDD</color>
+
 
 </resources>

@@ -56,5 +56,9 @@ dependencies {
 
     implementation ("com.google.android.gms:play-services-auth:19.0.0")
 
+    implementation ("com.google.android.material:material:1.8.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.airbnb.android:lottie:4.2.2")
+
 
 }
