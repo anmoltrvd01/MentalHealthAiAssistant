@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingHorizontal="16dp"
     android:paddingVertical="8dp">
 
@@ -92,13 +92,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
-        android:layout_marginTop="12dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/primary_color"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
+        app:layout_constraintTop_toBottomOf="@id/tvDateSeparator"
         app:layout_constraintWidth_max="wrap"
         tools:visibility="visible">
 
@@ -111,7 +110,6 @@
             android:textSize="15sp"
             tools:text="I'm feeling great today, ready for a challenge!" />
     </com.google.android.material.card.MaterialCardView>
-
 
     <TextView
         android:id="@+id/tvUserTimestamp"
@@ -141,13 +139,12 @@
         app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvUserTimestamp"
+        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
         app:strokeColor="@color/divider_color"
         app:strokeWidth="0.5dp"
         tools:visibility="visible">
 
-
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -169,24 +166,23 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
-                tools:text="30-minute HIIT session with focus on upper body" />
+                tools:text="30-minute HIT session with focus on upper body" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnViewDetails"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:minWidth="100dp"
                 android:minHeight="48dp"
-                android:paddingHorizontal="20dp"
-                android:paddingVertical="10dp"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
                 android:text="View Details"
                 android:textAllCaps="false"
                 android:textColor="@color/accent_color"
                 app:strokeColor="@color/accent_color" />
-
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
