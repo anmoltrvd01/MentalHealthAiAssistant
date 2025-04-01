@@ -1,34 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="4dp"
-    android:paddingBottom="4dp">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
 
-    <!-- Coach Message -->
+    <!-- Date Separator - Moved to top with cleaner styling -->
+    <TextView
+        android:id="@+id/tvDateSeparator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="12dp"
+        android:background="@drawable/bg_date_separator"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        android:alpha="0.8"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Today"
+        tools:visibility="visible" />
+
+    <!-- COACH MESSAGE GROUP -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupCoachMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="ivCoachAvatar,cardCoachMessage,tvCoachTimestamp" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivCoachAvatar"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:src="@drawable/ic_profile"
         app:civ_border_color="@color/primary_light_color"
-        app:civ_border_width="2dp"
+        app:civ_border_width="1.5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvDateSeparator" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCoachMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginEnd="72dp"
         app:cardBackgroundColor="@color/coach_message_background"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:layout_constraintStart_toEndOf="@id/ivCoachAvatar"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivCoachAvatar"
         app:layout_constraintWidth_max="wrap">
 
         <TextView
@@ -37,7 +63,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:textColor="@color/text_primary"
-            android:textSize="16sp"
+            android:textSize="15sp"
             tools:text="Let's work on your workout plan for today. How are you feeling?" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -45,27 +71,34 @@
         android:id="@+id/tvCoachTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
         android:alpha="0.6"
         android:textColor="@color/text_secondary"
-        android:textSize="12sp"
-        app:layout_constraintStart_toEndOf="@id/ivCoachAvatar"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/cardCoachMessage"
         app:layout_constraintTop_toBottomOf="@id/cardCoachMessage"
         tools:text="9:41 AM" />
 
-    <!-- User Message -->
+    <!-- USER MESSAGE GROUP -->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupUserMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="cardUserMessage,tvUserTimestamp" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardUserMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="12dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/primary_color"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
         app:layout_constraintWidth_max="wrap"
         tools:visibility="visible">
 
@@ -75,49 +108,50 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="15sp"
             tools:text="I'm feeling great today, ready for a challenge!" />
     </com.google.android.material.card.MaterialCardView>
+
 
     <TextView
         android:id="@+id/tvUserTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginTop="2dp"
         android:alpha="0.6"
         android:textColor="@color/text_secondary"
-        android:textSize="12sp"
+        android:textSize="11sp"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/cardUserMessage"
         app:layout_constraintTop_toBottomOf="@id/cardUserMessage"
         tools:text="9:42 AM"
         tools:visibility="visible" />
 
-    <!-- Interactive elements for coach messages -->
+    <!-- COACH SUGGESTION CARD -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCoachSuggestion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="64dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="48dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
-        app:cardElevation="1dp"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
+        app:layout_constraintTop_toBottomOf="@id/tvUserTimestamp"
         app:strokeColor="@color/divider_color"
-        app:strokeWidth="1dp"
+        app:strokeWidth="0.5dp"
         tools:visibility="visible">
 
-        <LinearLayout
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="12dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/tvSuggestionTitle"
@@ -139,33 +173,21 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnViewDetails"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
+                android:minWidth="100dp"
+                android:minHeight="48dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
                 android:text="View Details"
                 android:textAllCaps="false"
-                android:textColor="@color/accent_color" />
+                android:textColor="@color/accent_color"
+                app:strokeColor="@color/accent_color" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-    <!-- Day Separator -->
-    <TextView
-        android:id="@+id/tvDateSeparator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/bg_date_separator"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="6dp"
-        android:textColor="@color/text_secondary"
-        android:textSize="12sp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Today"
-        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
