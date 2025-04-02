@@ -20,6 +20,15 @@
             android:layout_height="?attr/actionBarSize"
             app:title="Health Dashboard"
             app:titleTextColor="@color/white"/>
+
+
+        <Button
+            android:id="@+id/btnGoogleSignIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign in with Google" />
+
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
