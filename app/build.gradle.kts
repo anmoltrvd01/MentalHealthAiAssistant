@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-  
-
+    id ("com.google.devtools.ksp")
 }
 
 android {
@@ -35,6 +34,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
 }
 
 dependencies {
@@ -62,6 +62,16 @@ dependencies {
     implementation ("com.google.android.material:material:1.8.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+
+
+
+    //Room DB
+    val room_version = "2.6.1"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version") // Coroutines support
+    ksp("androidx.room:room-compiler:$room_version") // Use KSP Instead of kapt
 
 
 }
