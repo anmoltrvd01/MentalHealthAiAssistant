@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.mentalhealthaibot.roomdb.AppDatabase
 import com.example.mentalhealthaibot.roomdb.UserEntity
 import com.example.mentalhealthaibot.roomdb.UserRepository
@@ -19,30 +22,50 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var userViewModel: UserViewModel
-
-
-//    private val UserViewModel: UserViewModel by lazy {
-//        val userDao = AppDatabase.getDatabase(this).userDao()
-//        val repository = UserRepository(userDao)
-//        val factory = UserViewModelFactory(repository)
-//        ViewModelProvider(this, factory)[UserViewModel::class.java]
-//    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Database aur Repository initialize karein
-        val database = AppDatabase.getDatabase(this)
+        val database: AppDatabase by lazy { AppDatabase.getDatabase(this) }
+//        val database = AppDatabase.getDatabase(this)
         val repository = UserRepository(database.userDao())
+        // UI references
+        val tvName = findViewById<TextView>(R.id.tvGreeting)
+        val ivProfile = findViewById<ImageView>(R.id.ivProfile)
+        val tvDate = findViewById<TextView>(R.id.tvDate)
+        val tvEmail = findViewById<TextView>(R.id.tvEmail)
+        val account = GoogleSignIn.getLastSignedInAccount(this)
+        val userEmail = account?.email
+        val userDao = AppDatabase.getDatabase(applicationContext).userDao()
+        val factory = UserViewModelFactory(repository)
+
+        // Set current Date and Time
+        val currentTime = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        tvDate.text = dateFormat.format(currentTime)
 
         // ViewModel sahi tarike se initialize karein
-        userViewModel = ViewModelProvider(this, UserViewModelFactory(repository))[UserViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+
+        userEmail?.let { email ->
+            userViewModel.getUserByEmail(email) { user ->
+                user?.let {
+                    tvName.text = it.name
+                    tvEmail.text = it.email
+                    Glide.with(this).load(it.profileImageUrl).into(ivProfile)
+                }
+            }
+        }
 
         val btnChat = findViewById<Button>(R.id.btnChat)
         btnChat.setOnClickListener {
@@ -51,8 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         val btnSignIn = findViewById<Button>(R.id.btnGoogleSignIn)
-
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         // Google Sign-In Setup
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -71,7 +92,7 @@ class MainActivity : AppCompatActivity() {
         googleSignInLauncher.launch(signInIntent)
     }
     private fun saveUserToDatabase(email: String, name: String, profileUrl: String) {
-        val user = UserEntity(email, name, profileUrl)
+        val user = UserEntity(id = 0, name = name, email = email, profileImageUrl = profileUrl)
         userViewModel.insertUser(user)
     }
 
