@@ -8,7 +8,7 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="8dp">
 
-    <!-- Date Separator - Moved to top with cleaner styling -->
+    <!-- Date Separator -->
     <TextView
         android:id="@+id/tvDateSeparator"
         android:layout_width="wrap_content"
@@ -32,12 +32,14 @@
         android:id="@+id/groupCoachMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         app:constraint_referenced_ids="ivCoachAvatar,cardCoachMessage,tvCoachTimestamp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivCoachAvatar"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_marginTop="8dp"
         android:src="@drawable/ic_profile"
         app:civ_border_color="@color/primary_light_color"
         app:civ_border_width="1.5dp"
@@ -46,7 +48,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardCoachMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="72dp"
@@ -55,7 +57,8 @@
         app:cardElevation="0dp"
         app:layout_constraintStart_toEndOf="@id/ivCoachAvatar"
         app:layout_constraintTop_toTopOf="@id/ivCoachAvatar"
-        app:layout_constraintWidth_max="wrap">
+        app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_default="wrap">
 
         <TextView
             android:id="@+id/tvCoachMessage"
@@ -64,6 +67,7 @@
             android:padding="12dp"
             android:textColor="@color/text_primary"
             android:textSize="15sp"
+            android:textIsSelectable="true"
             tools:text="Let's work on your workout plan for today. How are you feeling?" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -71,7 +75,7 @@
         android:id="@+id/tvCoachTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:layout_marginStart="12dp"
         android:alpha="0.6"
         android:textColor="@color/text_secondary"
@@ -85,20 +89,23 @@
         android:id="@+id/groupUserMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         app:constraint_referenced_ids="cardUserMessage,tvUserTimestamp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardUserMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
+        android:layout_marginTop="8dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/primary_color"
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvDateSeparator"
+        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
         app:layout_constraintWidth_max="wrap"
+        app:layout_constraintWidth_default="wrap"
         tools:visibility="visible">
 
         <TextView
@@ -108,6 +115,7 @@
             android:padding="12dp"
             android:textColor="@color/white"
             android:textSize="15sp"
+            android:textIsSelectable="true"
             tools:text="I'm feeling great today, ready for a challenge!" />
     </com.google.android.material.card.MaterialCardView>
 
@@ -115,7 +123,8 @@
         android:id="@+id/tvUserTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
         android:alpha="0.6"
         android:textColor="@color/text_secondary"
         android:textSize="11sp"
@@ -133,13 +142,15 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
+        android:layout_marginBottom="8dp"
         android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="12dp"
         app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvCoachTimestamp"
+        app:layout_constraintTop_toBottomOf="@id/tvUserTimestamp"
         app:strokeColor="@color/divider_color"
         app:strokeWidth="0.5dp"
         tools:visibility="visible">
@@ -163,7 +174,7 @@
                 android:id="@+id/tvSuggestionDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp"
                 tools:text="30-minute HIT session with focus on upper body" />
@@ -172,13 +183,10 @@
                 android:id="@+id/btnViewDetails"
                 style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:layout_marginTop="8dp"
-                android:minWidth="100dp"
-                android:minHeight="48dp"
+                android:layout_marginTop="12dp"
                 android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
                 android:text="View Details"
                 android:textAllCaps="false"
                 android:textColor="@color/accent_color"
