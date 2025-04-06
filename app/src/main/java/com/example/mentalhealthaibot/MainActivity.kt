@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var userViewModel: UserViewModel
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -53,9 +56,9 @@ class MainActivity : AppCompatActivity() {
         val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
         val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
         tvDate.text = dateFormat.format(currentTime)
+        // Create the ViewModel using the factory
+        userViewModel = ViewModelProvider(this, factory)[UserViewModel::class.java]
 
-        // ViewModel sahi tarike se initialize karein
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
         userEmail?.let { email ->
             userViewModel.getUserByEmail(email) { user ->
